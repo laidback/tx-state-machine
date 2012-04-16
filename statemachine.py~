@@ -1,6 +1,7 @@
 #!/usr/env python2.7
 # -*- coding: utf-8 *-*
 
+ 
 class StateMachine(object): 
  
     def __init__(self): 

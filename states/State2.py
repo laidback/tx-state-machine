@@ -1,0 +1,33 @@
+from state import State
+import random
+
+class State2(State):
+  
+    def render(self):
+        output = "Please give me some input:\n{input}".format(input = '\n'.join(self.acceptInput))
+        output += "\n:"
+        return output
+    
+    def process(self, input):
+        self.actInput = input
+        if self._validateInput(input):
+            funcName = self.acceptInput[input]['action']
+            func = getattr(self, funcName, None)
+            return func()
+        else:
+            print "Not valid Input! \n"
+            return self.name, self.data
+
+    def do(self):
+        rndNum = random.random()
+        if rndNum <= 0.5:
+            return self.acceptInput[self.actInput]['callback'], ''
+        else:
+            return self.acceptInput[self.actInput]['errback'], ''
+    
+    def da(self):
+        rndNum = random.random()
+        if rndNum <= 0.5:
+            return self.acceptInput[self.actInput]['callback'], ''
+        else:
+            return self.acceptInput[self.actInput]['errback'], ''
